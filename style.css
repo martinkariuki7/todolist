@@ -48,3 +48,10 @@ input[type="text"]{
 input:focus{
     outline: 0;
 }
+.alert{
+    width: 100%;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    padding: 1em;
+}
