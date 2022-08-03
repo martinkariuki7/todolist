@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html,body{
+    background-color: gainsboro;
+    font-family: 'Merriweather', serif;
+}
+
+.container{
+    background-color: white;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 4em;
+    border-radius: 10px;
+}
+
+button.add-to-do{
+    background-color: darkblue;
+    border: none;
+    padding: 12px 24px;
+    color: white;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+input[type="text"]{
+    width: 100%;
+    font-size: 16px;
+    padding: 5px 0;
+    border: none;
+    margin:1em 0;
+}
+.task-complete{
+    text-decoration: line-through;
+    opacity: .5;
+}
+::placeholder{
+    color: #ccc;
+}
+
+input:focus{
+    outline: 0;
+}
