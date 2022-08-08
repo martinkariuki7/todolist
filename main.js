@@ -24,7 +24,7 @@ function populateToDo(){
     alertArea.innerHTML = `<p class="alert">You must write something</p>`
   } else {
     toDoList.push(toDoObject) 
-    localStorage.setItem('ToDoList', JSON.stringify(toDoList))
+    updateLocalStorage()
     updateDOM()
   }
 
@@ -49,7 +49,10 @@ function updateDOM(){
             // Show task on the front
             let task = document.createElement('div')
             task.classList.add('task')
-            task.innerHTML = `<label><input type="checkbox" >${item.name}</label><br>`
+            task.innerHTML = `
+                              <label><input type="checkbox" >${item.name}</label>
+                              <span class="delete">x</span>
+                              `
             
             // Mark completed items
             if(!item.status){
@@ -67,9 +70,19 @@ function updateDOM(){
                 : item.status              
 
                 task.classList.toggle('task-complete')
-                localStorage.setItem('ToDoList', JSON.stringify(toDoList))
+                updateLocalStorage()
                 
             })
+
+           // Remove items from DOM and array
+           task.querySelector('.delete').addEventListener('click', () => {
+              let index = toDoList.indexOf(item)
+              if (index > -1) {
+                toDoList.splice(index, 1); // 2nd parameter means remove one item only
+                updateLocalStorage()
+              }
+              task.remove()
+           })
 
           }
     })
@@ -77,6 +90,11 @@ function updateDOM(){
     newToDo.value = ''  
     alertArea.innerHTML = ''
 
+}
+
+//Update local Storage
+function updateLocalStorage(){
+  localStorage.setItem('ToDoList', JSON.stringify(toDoList))
 }
 
 // Event listeners
