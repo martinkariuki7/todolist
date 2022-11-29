@@ -6,8 +6,11 @@ const alertArea = document.getElementById('alert')
 let toDoList = []
 let oldToDoList = []
 
+
+
 populateUI()
 updateDOM()
+getRandomPhoto()
 
 // Populate to do list
 function populateToDo(){
@@ -95,6 +98,15 @@ function updateDOM(){
 //Update local Storage
 function updateLocalStorage(){
   localStorage.setItem('ToDoList', JSON.stringify(toDoList))
+}
+
+// Get a random photo from unsplash
+async function getRandomPhoto(){
+  const response = await fetch('https://api.unsplash.com/photos/random/?client_id=46W-inHpmr-R2SV169f_qUj42NSMFOGXbKNikPlSO8M');
+  const data = await response.json();
+  const imageSource = data.urls.regular
+  
+  document.body.style.backgroundImage = `url(${imageSource})`;
 }
 
 // Event listeners

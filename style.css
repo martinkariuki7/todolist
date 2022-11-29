@@ -7,7 +7,6 @@
 html,body{
     background-color: black;
     font-family: 'Roboto', sans-serif;
-    background-image: url('img/bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -41,6 +40,9 @@ html,body{
     margin: 0 auto;
     padding: 4em;
     border-radius: 10px;
+    transition-property: width;
+    transition-duration: 4s;
+    transition-delay: 2s;
 }
 
 button.add-to-do{
