@@ -1,115 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html,body{
-    background-color: black;
-    font-family: 'Roboto', sans-serif;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}   
-.img-credit{
-    position: absolute;
-    inset: 2em auto auto 2em;
-    color: white;
-    font-size: 12px;
-    font-weight: 300;
+html,
+body {
+  background-color: black;
+  font-family: "Roboto", sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
-.img-credit a, a:hover, a:focus, a:visited{
-    color: white;
-    opacity: .6;
-    text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid white;
+.img-credit {
+  position: absolute;
+  inset: 2em auto auto 2em;
+  color: white;
+  font-size: 12px;
+  font-weight: 300;
 }
-.container{
-    position: fixed;
-    inset: auto 2em 2em auto;
-    background-color: white;
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 4em;
-    border-radius: 10px;
-    transition-property: width;
-    transition-duration: 4s;
-    transition-delay: 2s;
+.img-credit a,
+a:hover,
+a:focus,
+a:visited {
+  color: white;
+  opacity: 0.6;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid white;
+}
+.container {
+  position: fixed;
+  inset: auto 2em 2em auto;
+  background-color: white;
+  width: fit-content;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 4em;
+  border-radius: 10px;
+  transition-property: width;
+  transition-duration: 4s;
+  transition-delay: 2s;
 }
 
-button.add-to-do{
-    background-color: black;
-    border: none;
-    padding: 12px 24px;
-    color: white;
-    font-size: 16px;
-    border-radius: 20px;
-    cursor: pointer;
+small {
+  color: rgb(136, 136, 136);
+  display: inline-block;
+  margin-top: 25px;
+  font-weight: 300;
 }
-label{
-    display: flex;
-    align-items: center;
+
+button.add-to-do {
+  background-color: black;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
 }
-input[type="text"]{
-    width: 100%;
-    font-size: 16px;
-    padding: 5px 0;
-    border: none;
-    margin: 1em 0;
+label {
+  display: flex;
+  align-items: center;
+}
+input[type="text"] {
+  width: 100%;
+  font-size: 16px;
+  padding: 5px 0;
+  border: none;
+  margin: 1em 0;
 }
 input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    border-radius: 50%;
-    border: 3px solid #151617;
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  border: 3px solid #151617;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
 }
 input[type="checkbox"]:checked {
-    background: black;
-    outline: 0;
+  background: black;
+  outline: 0;
 }
-.task{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em 0;
-    border-bottom: 1px solid rgb(235, 235, 235);
-    font-weight: 300;
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+  border-bottom: 1px solid rgb(235, 235, 235);
+  font-weight: 300;
 }
-.task span{
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-    margin-left: 10px;
+.task span {
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  margin-left: 10px;
 }
-.task-complete label{
-    text-decoration: line-through;
-    opacity: .5;
+.task-complete label {
+  text-decoration: line-through;
+  opacity: 0.5;
 }
-::placeholder{
-    color: #ccc;
+::placeholder {
+  color: #ccc;
 }
 
-input:focus{
-    outline: 0;
+input:focus {
+  outline: 0;
 }
-.alert{
-    width: 100%;
-    background-color: red;
-    color: white;
-    font-size: 14px;
-    padding: 1em;
-    font-weight: 300;
+.alert {
+  width: 100%;
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  padding: 1em;
+  font-weight: 300;
 }
-.controls{
-    margin-top: 1em;
+.controls {
+  margin-top: 1em;
 }
