@@ -125,3 +125,10 @@ input:focus {
 .controls {
   margin-top: 1em;
 }
+
+@media (max-width: 650px) {
+  .container {
+    position: relative;
+    padding: 2em;
+  }
+}
