@@ -2,13 +2,22 @@ const newToDo = document.getElementById("todo-new");
 const addBtn = document.getElementById("addToDo");
 const main = document.getElementById("toDoList");
 const alertArea = document.getElementById("alert");
+const quotesWrapper = document.getElementById("quotes");
 
 let toDoList = [];
 let oldToDoList = [];
 
+let quotes = [
+  "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly consistency, because without commitment you’ll never start but without consistency you’ll never finish.",
+  "You never grow in good times",
+  "Slow is smooth & smooth is fast",
+  "Stay hungry, stay foolish",
+];
+
 populateUI();
 updateDOM();
 getRandomPhoto();
+quotesWrapper.innerHTML = getRandomValueFromArray(quotes);
 
 // Populate to do list
 function populateToDo() {
@@ -102,6 +111,11 @@ async function getRandomPhoto() {
   const imageSource = data.urls.regular;
 
   document.body.style.backgroundImage = `url(${imageSource})`;
+}
+
+//Get random item from array
+function getRandomValueFromArray(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 // Event listeners

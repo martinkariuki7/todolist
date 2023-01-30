@@ -51,8 +51,8 @@ a:visited {
 }
 
 small {
+  display: block !important;
   color: rgb(136, 136, 136);
-  display: inline-block;
   margin-top: 25px;
   font-weight: 300;
 }
