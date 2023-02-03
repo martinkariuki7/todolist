@@ -9,14 +9,15 @@ let oldToDoList = [];
 
 let quotes = [
   "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly consistency, because without commitment you’ll never start but without consistency you’ll never finish.",
-  "You never grow in good times",
-  "Slow is smooth & smooth is fast",
-  "Stay hungry, stay foolish",
+  "You never grow in good times.",
+  "Slow is smooth & smooth is fast.",
+  "Stay hungry, stay foolish.",
 ];
 
 populateUI();
 updateDOM();
 getRandomPhoto();
+
 quotesWrapper.innerHTML = getRandomValueFromArray(quotes);
 
 // Populate to do list
@@ -108,6 +109,13 @@ async function getRandomPhoto() {
     "https://api.unsplash.com/photos/random/?client_id=46W-inHpmr-R2SV169f_qUj42NSMFOGXbKNikPlSO8M"
   );
   const data = await response.json();
+  console.log(data);
+  let imageCredit = document.getElementById("unplash-credit");
+  imageCredit.innerHTML = `
+    <p>
+       Photo by <a href="${data.user.links.html}" target="_Blank">${data.user.name}</a> randomly picked from <a href="https://unsplash.com"> Unsplash</a>  
+    </p>
+  `;
   const imageSource = data.urls.regular;
 
   document.body.style.backgroundImage = `url(${imageSource})`;
