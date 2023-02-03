@@ -69,7 +69,6 @@ button.add-to-do {
 label {
   display: flex;
   align-items: center;
-  line-break: anywhere;
 }
 input[type="text"] {
   width: 100%;
