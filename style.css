@@ -43,11 +43,29 @@ a:visited {
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-  padding: 4em;
   border-radius: 10px;
   transition-property: width;
   transition-duration: 4s;
   transition-delay: 2s;
+}
+
+.row {
+  max-height: 50vh;
+  overflow: hidden;
+  padding: 4em 4em 0;
+}
+
+.row.has-content {
+  overflow-y: scroll;
+}
+
+.row > * {
+  margin: 0;
+  padding: 0;
+}
+
+.row h1 {
+  margin-bottom: 0.5em;
 }
 
 small {
@@ -124,6 +142,7 @@ input:focus {
 }
 .controls {
   margin-top: 1em;
+  padding: 0 4em 4em;
 }
 
 @media (max-width: 650px) {
@@ -135,5 +154,14 @@ input:focus {
     position: relative;
     padding: 2em;
     inset: 0;
+    min-height: 100vh;
+    border-radius: 0;
+    width: 100%;
+  }
+  .row,
+  .controls {
+    padding: 0;
+    max-height: fit-content;
+    overflow: auto;
   }
 }

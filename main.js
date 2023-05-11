@@ -8,7 +8,7 @@ let toDoList = [];
 let oldToDoList = [];
 
 let quotes = [
-  "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly consistency, because without commitment you’ll never start but without consistency you’ll never finish.",
+  "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly commitment & consistency, because without commitment you’ll never start & without consistency you’ll never finish.",
   "You never grow in good times.",
   "Slow is smooth & smooth is fast.",
   "Stay hungry, stay foolish.",
@@ -88,6 +88,7 @@ function updateDOM() {
         if (index > -1) {
           toDoList.splice(index, 1); // 2nd parameter means remove one item only
           updateLocalStorage();
+          checkRowContent();
         }
         task.remove();
       });
@@ -126,11 +127,27 @@ function getRandomValueFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+function checkRowContent() {
+  const row = document.querySelector(".row");
+
+  if (row.scrollHeight > row.offsetHeight) {
+    row.classList.add("has-content");
+  } else {
+    row.classList.remove("has-content");
+  }
+
+  console.log(row.scrollHeight, row.clientHeight);
+}
+
 // Event listeners
-addBtn.addEventListener("click", populateToDo);
+addBtn.addEventListener("click", () => {
+  populateToDo();
+  checkRowContent();
+});
 newToDo.addEventListener("keydown", (e) => {
   if (e.code === "Enter") {
     e.preventDefault();
     populateToDo();
+    checkRowContent();
   }
 });
