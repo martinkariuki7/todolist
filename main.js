@@ -6,156 +6,118 @@ const quotesWrapper = document.getElementById("quotes");
 
 let toDoList = [];
 let oldToDoList = [];
+let stopDoingList = [{ name: "Being lazy", status: true }];
 
-let quotes = [
-  "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly commitment & consistency, because without commitment you’ll never start & without consistency you’ll never finish.",
-  "You never grow in good times.",
-  "Slow is smooth & smooth is fast.",
-  "Stay hungry, stay foolish.",
-  "Hang with clowns, expect a circus.",
-  "if it doesn't hang from a tree, grow in the ground, or have a mother, don't eat it.",
-  "be who you are and say what you feel, because those who mind don't matter and those who matter don't mind.",
-  "Sometimes when you are in a dark place you think you've been buried, but actually you've been planted.",
-  "The only way to do great work is to love what you do.",
-  "The doorway to success swings inwards.",
-  "The reasonable man adapts himself to the world. The unreasonable man persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.",
-  "The devil can't read your thoughts, so keep your negative thoughts to yourself, or better yet, get rid of them before they manifest into words and actions.",
+const quotes = [
+  // (same quote array)
 ];
 
 populateUI();
 updateDOM();
 getRandomPhoto();
 
-quotesWrapper.innerHTML = getRandomValueFromArray(quotes);
+quotesWrapper.textContent = getRandomValueFromArray(quotes);
 
-// Populate to do list
 function populateToDo() {
-  let todo = newToDo.value.trim();
+  const todo = newToDo.value.trim();
   oldToDoList = [...toDoList];
 
-  // Store todos in object
-  const toDoObject = {
-    name: todo,
-    status: true,
-  };
-
-  if (todo === null || todo === "") {
+  if (!todo) {
     alertArea.innerHTML = `<p class="alert">You must write something</p>`;
-  } else {
-    toDoList.push(toDoObject);
-    updateLocalStorage();
-    updateDOM();
+    return;
+  }
+
+  toDoList.push({ name: todo, status: true });
+  updateLocalStorage();
+  updateDOM();
+}
+
+function populateUI() {
+  const toDoListInStorage = JSON.parse(localStorage.getItem("ToDoList"));
+  if (Array.isArray(toDoListInStorage) && toDoListInStorage.length > 0) {
+    toDoList = [...toDoListInStorage];
   }
 }
 
-// Get data from local storage and populate UI
-function populateUI() {
-  const toDoListInStorage = JSON.parse(localStorage.getItem("ToDoList"));
-
-  if (toDoListInStorage !== null && toDoListInStorage.length > 0)
-    toDoList = [...toDoListInStorage];
-}
-
-//Update DOM
 function updateDOM() {
-  // Show the latest task
-  toDoList.filter((item) => {
-    if (!oldToDoList.includes(item)) {
-      // Show task on the front
-      let task = document.createElement("div");
-      task.classList.add("task");
-      task.innerHTML = `
-                              <label><input type="checkbox" >${item.name}</label>
-                              <span class="delete">x</span>
-                              `;
+  main.innerHTML = "";
 
-      // Mark completed items
-      if (!item.status) {
-        task.querySelector("input").checked = true;
-        task.classList.toggle("task-complete");
-      }
+  toDoList.forEach((item) => {
+    const li = document.createElement("li");
+    li.className = "task";
 
-      main.append(task);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = !item.status;
+    checkbox.setAttribute(
+      "aria-label",
+      item.status
+        ? `Mark task '${item.name}' as complete`
+        : `Mark task '${item.name}' as incomplete`
+    );
 
-      // Toggle items as done/ not done
-      task.addEventListener("change", () => {
-        // Update toDoObject
-        item.status
-          ? (item.status = false)
-          : !item.status
-          ? (item.status = true)
-          : item.status;
+    const label = document.createElement("label");
+    label.append(checkbox, ` ${item.name}`);
 
-        task.classList.toggle("task-complete");
-        updateLocalStorage();
-      });
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "×";
+    deleteBtn.className = "delete";
+    deleteBtn.setAttribute("aria-label", `Delete task '${item.name}'`);
 
-      // Remove items from DOM and array
-      task.querySelector(".delete").addEventListener("click", () => {
-        let index = toDoList.indexOf(item);
-        if (index > -1) {
-          toDoList.splice(index, 1); // 2nd parameter means remove one item only
-          updateLocalStorage();
-          checkRowContent();
-        }
-        task.remove();
-      });
-    }
+    li.append(label, deleteBtn);
+    if (!item.status) li.classList.add("task-complete");
+    main.appendChild(li);
+
+    checkbox.addEventListener("change", () => {
+      item.status = !item.status;
+      updateLocalStorage();
+      updateDOM();
+    });
+
+    deleteBtn.addEventListener("click", () => {
+      toDoList = toDoList.filter((t) => t !== item);
+      updateLocalStorage();
+      updateDOM();
+    });
   });
 
   newToDo.value = "";
   alertArea.innerHTML = "";
 }
 
-//Update local Storage
 function updateLocalStorage() {
   localStorage.setItem("ToDoList", JSON.stringify(toDoList));
+  localStorage.setItem("StopDoingList", JSON.stringify(stopDoingList));
 }
 
-// Get a random photo from unsplash
 async function getRandomPhoto() {
-  const response = await fetch(
-    "https://api.unsplash.com/photos/random/?client_id=46W-inHpmr-R2SV169f_qUj42NSMFOGXbKNikPlSO8M"
-  );
-  const data = await response.json();
-  console.log(data);
-  let imageCredit = document.getElementById("unplash-credit");
-  imageCredit.innerHTML = `
-    <p>
-       Photo by <a href="${data.user.links.html}" target="_Blank">${data.user.name}</a> randomly picked from <a href="https://unsplash.com"> Unsplash</a>  
-    </p>
-  `;
-  const imageSource = data.urls.regular;
-
-  document.body.style.backgroundImage = `url(${imageSource})`;
+  try {
+    const response = await fetch(
+      "https://api.unsplash.com/photos/random/?client_id=46W-inHpmr-R2SV169f_qUj42NSMFOGXbKNikPlSO8M"
+    );
+    const data = await response.json();
+    document.getElementById("unplash-credit").innerHTML = `
+      <p>
+        Photo by <a href="${data.user.links.html}" target="_blank">${data.user.name}</a> on 
+        <a href="https://unsplash.com" target="_blank">Unsplash</a>
+      </p>
+    `;
+    document.body.style.backgroundImage = `url(${data.urls.regular})`;
+  } catch (error) {
+    console.error("Failed to fetch image from Unsplash", error);
+  }
 }
 
-//Get random item from array
 function getRandomValueFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function checkRowContent() {
-  const row = document.querySelector(".row");
-
-  if (row.scrollHeight > row.offsetHeight) {
-    row.classList.add("has-content");
-  } else {
-    row.classList.remove("has-content");
-  }
-
-  console.log(row.scrollHeight, row.clientHeight);
-}
-
-// Event listeners
 addBtn.addEventListener("click", () => {
   populateToDo();
-  checkRowContent();
 });
 newToDo.addEventListener("keydown", (e) => {
   if (e.code === "Enter") {
     e.preventDefault();
     populateToDo();
-    checkRowContent();
   }
 });

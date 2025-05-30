@@ -84,6 +84,12 @@ button.add-to-do {
   border-radius: 20px;
   cursor: pointer;
 }
+button.delete {
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+}
 label {
   display: flex;
   align-items: center;
@@ -115,6 +121,9 @@ input[type="checkbox"]:checked {
   padding: 1em 0;
   border-bottom: 1px solid rgb(235, 235, 235);
   font-weight: 300;
+  word-wrap: break-word; /* For legacy support */
+  overflow-wrap: break-word; /* Modern standard */
+  word-break: break-word; /* Optional: breaks long unbreakable strings */
 }
 .task span {
   font-family: "Roboto", sans-serif;
@@ -145,6 +154,86 @@ input:focus {
   padding: 0 4em 4em;
 }
 
+/** Todo toggles **/
+.toggle-buttons {
+  position: absolute;
+  inset: 2rem 2rem auto auto;
+  width: fit-content;
+  display: flex;
+}
+
+.toggle-buttons button {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.toggle-buttons p:first-of-type {
+  display: inline;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px; /* 50% of original 70px */
+  height: 20px; /* 50% of original 40px */
+}
+
+.switch input[type="checkbox"] {
+  -webkit-appearance: none;
+}
+
+.switch input:checked + .knob {
+  background-color: #4bd663;
+}
+
+.switch input + .knob {
+  transition: all 0.3s ease-in;
+}
+
+.switch input + .knob:before {
+  transition: all 0.3s ease-in;
+}
+
+.switch input:checked + .knob:before {
+  transform: translateX(15px); /* Was 30.4px → now ~15px */
+  box-shadow: -5px 0px 22px 0px; /* Optional: scale this down too */
+}
+
+.knob {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px; /* 50% of original 40px */
+}
+
+.knob:before {
+  position: absolute;
+  background-color: white;
+  content: "";
+  left: 2px; /* Adjusted from 4px */
+  top: 2px; /* Adjusted from 4px */
+  width: 16px; /* 50% of original 32px */
+  height: 16px;
+  border-radius: 50%;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/** Mobile **/
 @media (max-width: 650px) {
   html,
   body {
