@@ -125,6 +125,9 @@ input[type="checkbox"]:checked {
   overflow-wrap: break-word; /* Modern standard */
   word-break: break-word; /* Optional: breaks long unbreakable strings */
 }
+.task label {
+  width: -webkit-fill-available;
+}
 .task span {
   font-family: "Roboto", sans-serif;
   cursor: pointer;

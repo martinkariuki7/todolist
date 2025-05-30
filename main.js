@@ -9,7 +9,18 @@ let oldToDoList = [];
 let stopDoingList = [{ name: "Being lazy", status: true }];
 
 const quotes = [
-  // (same quote array)
+  "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly commitment & consistency, because without commitment you’ll never start & without consistency you’ll never finish.",
+  "You never grow in good times.",
+  "Slow is smooth & smooth is fast.",
+  "Stay hungry, stay foolish.",
+  "Hang with clowns, expect a circus.",
+  "if it doesn't hang from a tree, grow in the ground, or have a mother, don't eat it.",
+  "be who you are and say what you feel, because those who mind don't matter and those who matter don't mind.",
+  "Sometimes when you are in a dark place you think you've been buried, but actually you've been planted.",
+  "The only way to do great work is to love what you do.",
+  "The doorway to success swings inwards.",
+  "The reasonable man adapts himself to the world. The unreasonable man persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.",
+  "The devil can't read your thoughts, so keep your negative thoughts to yourself, or better yet, get rid of them before they manifest into words and actions.",
 ];
 
 populateUI();
