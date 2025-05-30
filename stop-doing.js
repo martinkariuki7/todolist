@@ -4,8 +4,8 @@ const main = document.getElementById("toDoList");
 const alertArea = document.getElementById("alert");
 const quotesWrapper = document.getElementById("quotes");
 
-let toDoList = [];
-let oldToDoList = [];
+let stopDoingList = [];
+let oldStopDoingList = [];
 
 const quotes = [
   "Dreams without goals are just dreams and ultimately they fuel dissapointment. On the road to achieving your dreams, you must apply discpline but more importantly commitment & consistency, because without commitment you’ll never start & without consistency you’ll never finish.",
@@ -30,29 +30,34 @@ quotesWrapper.textContent = getRandomValueFromArray(quotes);
 
 function populateToDo() {
   const todo = newToDo.value.trim();
-  oldToDoList = [...toDoList];
+  oldStopDoingList = [...stopDoingList];
 
   if (!todo) {
     alertArea.innerHTML = `<p class="alert">You must write something</p>`;
     return;
   }
 
-  toDoList.push({ name: todo, status: true });
+  stopDoingList.push({ name: todo, status: true });
   updateLocalStorage();
   updateDOM();
 }
 
 function populateUI() {
-  const toDoListInStorage = JSON.parse(localStorage.getItem("ToDoList"));
-  if (Array.isArray(toDoListInStorage) && toDoListInStorage.length > 0) {
-    toDoList = [...toDoListInStorage];
+  const stopDoingListInStorage = JSON.parse(
+    localStorage.getItem("StopDoingList")
+  );
+  if (
+    Array.isArray(stopDoingListInStorage) &&
+    stopDoingListInStorage.length > 0
+  ) {
+    stopDoingList = [...stopDoingListInStorage];
   }
 }
 
 function updateDOM() {
   main.innerHTML = "";
 
-  toDoList.forEach((item) => {
+  stopDoingList.forEach((item) => {
     const li = document.createElement("li");
     li.className = "task";
 
@@ -85,7 +90,7 @@ function updateDOM() {
     });
 
     deleteBtn.addEventListener("click", () => {
-      toDoList = toDoList.filter((t) => t !== item);
+      stopDoingList = stopDoingList.filter((t) => t !== item);
       updateLocalStorage();
       updateDOM();
     });
@@ -96,8 +101,11 @@ function updateDOM() {
 }
 
 function updateLocalStorage() {
-  localStorage.setItem("ToDoList", JSON.stringify(toDoList));
+  //localStorage.setItem("ToDoList", JSON.stringify(toDoList));
+  localStorage.setItem("StopDoingList", JSON.stringify(stopDoingList));
 }
+
+console.log(localStorage.getItem("StopDoingList"));
 
 async function getRandomPhoto() {
   try {

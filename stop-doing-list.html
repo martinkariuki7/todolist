@@ -28,22 +28,22 @@
     </div>
 
     <main class="container">
-      <section class="row" id="toDoList" aria-label="To-do list" role="list">
+      <section class="row" aria-label="To-do list" role="list">
         <h1>Stop doing list 🚫</h1>
-        <!-- List items will be injected by JavaScript -->
+        <div id="toDoList"></div>
       </section>
 
       <section class="controls">
-        <label for="todo-new" class="visually-hidden">New to-do</label>
+        <label for="todo-new" class="visually-hidden">New bad habit</label>
         <input
           type="text"
-          placeholder="New Todo"
+          placeholder="New Bad Habit"
           id="todo-new"
           class="todo-input"
           aria-label="Enter new to-do"
         />
         <button id="addToDo" class="add-to-do" aria-label="Add to-do">
-          Add Todo
+          + Add bad habit
         </button>
 
         <small id="quotes" aria-live="polite"></small>
@@ -52,6 +52,6 @@
       <div id="alert" role="alert" aria-live="assertive"></div>
     </main>
 
-    <script src="main.js"></script>
+    <script src="stop-doing.js"></script>
   </body>
 </html>
