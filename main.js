@@ -1,3 +1,4 @@
+const toggle = document.getElementById("toDoToggle");
 const newToDo = document.getElementById("todo-new");
 const addBtn = document.getElementById("addToDo");
 const main = document.getElementById("toDoList");
@@ -128,5 +129,25 @@ newToDo.addEventListener("keydown", (e) => {
   if (e.code === "Enter") {
     e.preventDefault();
     populateToDo();
+  }
+});
+
+// On page load, set toggle state from localStorage
+const savedState = localStorage.getItem("toggleState");
+if (savedState === "on") {
+  toggle.checked = true;
+} else {
+  toggle.checked = false;
+}
+
+toggle.addEventListener("change", () => {
+  if (toggle.checked) {
+    // Navigate to new URL when toggled ON
+    window.location.href =
+      "file:///Users/martin/Projects/To-do-list/stop-doing-list.html";
+  } else {
+    // Navigate to another URL when toggled OFF (optional)
+    window.location.href =
+      "file:///Users/martin/Projects/To-do-list/index.html";
   }
 });
