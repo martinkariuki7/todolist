@@ -14,9 +14,6 @@ const quotes = [
   "Slow is smooth & smooth is fast.",
   "Stay hungry, stay foolish.",
   "Hang with clowns, expect a circus.",
-  "if it doesn't hang from a tree, grow in the ground, or have a mother, don't eat it.",
-  "be who you are and say what you feel, because those who mind don't matter and those who matter don't mind.",
-  "Sometimes when you are in a dark place you think you've been buried, but actually you've been planted.",
   "The only way to do great work is to love what you do.",
   "The doorway to success swings inwards.",
   "The reasonable man adapts himself to the world. The unreasonable man persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.",
@@ -34,7 +31,7 @@ function populateToDo() {
   oldToDoList = [...toDoList];
 
   if (!todo) {
-    alertArea.innerHTML = `<p class="alert">You must write something</p>`;
+    alertArea.innerHTML = `<p class="alert">Oops! Looks like you forgot to write something.</p>`;
     return;
   }
 
@@ -125,29 +122,10 @@ function getRandomValueFromArray(array) {
 addBtn.addEventListener("click", () => {
   populateToDo();
 });
+
 newToDo.addEventListener("keydown", (e) => {
   if (e.code === "Enter") {
     e.preventDefault();
     populateToDo();
-  }
-});
-
-// On page load, set toggle state from localStorage
-const savedState = localStorage.getItem("toggleState");
-if (savedState === "on") {
-  toggle.checked = true;
-} else {
-  toggle.checked = false;
-}
-
-toggle.addEventListener("change", () => {
-  if (toggle.checked) {
-    // Navigate to new URL when toggled ON
-    window.location.href =
-      "file:///Users/martin/Projects/To-do-list/stop-doing-list.html";
-  } else {
-    // Navigate to another URL when toggled OFF (optional)
-    window.location.href =
-      "file:///Users/martin/Projects/To-do-list/index.html";
   }
 });
