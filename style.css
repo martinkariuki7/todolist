@@ -188,6 +188,7 @@ input:focus {
 }
 
 .switch input[type="checkbox"] {
+  appearance: none;
   -webkit-appearance: none;
 }
 
